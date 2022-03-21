@@ -1,7 +1,10 @@
-import React from 'react'
+import React from "react";
+import { Text, View } from "react-native";
 
-export default function AddBloodSugarLevel({navigation}) {
+export default function AddBloodSugarLevel({ navigation }) {
   return (
-    <div>AddBloodSugarLevel</div>
-  )
+    <View>
+      <Text>AddBloodSugarLevel</Text>
+    </View>
+  );
 }

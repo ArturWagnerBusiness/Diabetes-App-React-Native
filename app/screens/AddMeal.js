@@ -1,7 +1,10 @@
-import React from 'react'
+import React from "react";
+import { Text, View } from "react-native";
 
-export default function AddMeal({navigation}) {
+export default function AddMeal({ navigation }) {
   return (
-    <div>AddMeal</div>
-  )
+    <View>
+      <Text>AddMeal</Text>
+    </View>
+  );
 }
