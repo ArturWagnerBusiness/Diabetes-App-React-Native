@@ -1,6 +1,10 @@
 import React from "react";
-import { View } from "react-native";
+import { Text, View } from "react-native";
 
-export default function RecordItem() {
-  return <View>RecordItem</View>;
+export default function RecordItem(props) {
+  return (
+    <View>
+      <Text>RecordItem</Text>
+    </View>
+  );
 }
