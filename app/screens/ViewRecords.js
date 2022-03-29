@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
-import { Text } from "react-native";
+import { useEffect, useState, useContext } from "react";
 import { FAB, Modal, Portal, Provider } from "react-native-paper";
+import { Text, FlatList } from "react-native";
 import ItemContext from "../contexts/ItemContext";
+import RecordItem from "../components/RecordItem";
 
 export default function ViewRecords({ navigation }) {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isSettingsOpen, setSettingsOpen] = useState(false);
+  const { state } = useContext(ItemContext);
+
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
@@ -40,6 +43,13 @@ export default function ViewRecords({ navigation }) {
           </Modal>
         </Portal>
       </Provider>
+      <FlatList
+        data={state}
+        keyExtractor={(e) => e.id.toString()}
+        renderItem={({ item }) => {
+          return <RecordItem item={item} />;
+        }}
+      />
       <Provider>
         <Portal>
           <FAB.Group
