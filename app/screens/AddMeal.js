@@ -28,7 +28,7 @@ export default function AddMeal({ navigation }) {
         style={{
           ...defaultStyle,
         }}
-        label="Carbohydrates"
+        label="Carbohydrates*"
         value={carbo}
         onChangeText={(text) => setCarbo(text)}
         right={<TextInput.Affix text="grams" />}
@@ -41,14 +41,21 @@ export default function AddMeal({ navigation }) {
         color={COLOR.PRIMARY}
         mode="contained"
         onPress={() => {
-          try {
-            storage.create({
-              type: "meal",
-              name,
-              value: carbo,
-            });
-          } catch (e) {}
-          navigation.pop();
+          // Checking if required fields are filled
+          if (carbo === "") {
+            alert(
+              "Please fill required fields (Carbohydrates field) or cancel form"
+            );
+          } else {
+            try {
+              storage.create({
+                type: "meal",
+                name,
+                value: carbo,
+              });
+            } catch (e) {}
+            navigation.pop();
+          }
         }}
       >
         Add record
