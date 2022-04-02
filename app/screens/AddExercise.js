@@ -46,7 +46,6 @@ export default function AddExercise({ navigation }) {
               name,
             });
           } catch (e) {}
-          alert("Activity/Exercise has been added.");
           navigation.pop();
         }}
       >

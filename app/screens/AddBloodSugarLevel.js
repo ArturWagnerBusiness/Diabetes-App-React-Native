@@ -91,7 +91,6 @@ export default function AddBloodSugarLevel({ navigation }) {
               challenge: typeof challenge === "string" ? challenge : "",
             });
           } catch (e) {}
-          alert("Blood Sugar Level has been added.");
           navigation.pop();
         }}
       >

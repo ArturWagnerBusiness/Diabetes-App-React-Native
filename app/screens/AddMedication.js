@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, View } from "react-native";
-import { Button, TextInput } from "react-native-paper";
+import { Button, ToggleButton } from "react-native-paper";
 import ItemContext from "../contexts/ItemContext";
 import { COLOR } from "../pallet";
 
@@ -11,18 +11,51 @@ let defaultStyle = {
 
 export default function AddMedication({ navigation }) {
   const storage = React.useContext(ItemContext);
-  const [name, setName] = React.useState("");
+  const [name, setName] = React.useState("Fiasp");
   const CURRENT_TIME = new Date();
   return (
     <View>
-      <TextInput
-        style={{
-          ...defaultStyle,
-        }}
-        label="Name"
+      <ToggleButton.Group
+        onValueChange={(value) => setName(value)}
         value={name}
-        onChangeText={(text) => setName(text)}
-      />
+      >
+        <Text
+          style={{
+            ...defaultStyle,
+            fontSize: 18,
+          }}
+        >
+          Select Fiasp (Short/Fast acting){" "}
+          {name === "Fiasp" ? "(Selected)" : ""}
+        </Text>
+        <ToggleButton
+          style={{
+            ...defaultStyle,
+            marginTop: 0,
+            width: "100%",
+          }}
+          icon="camera-timer"
+          value="Fiasp"
+        />
+        <Text
+          style={{
+            ...defaultStyle,
+            fontSize: 18,
+          }}
+        >
+          Select Tresiba (Long/Slow acting){" "}
+          {name === "Tresiba" ? "(Selected)" : ""}
+        </Text>
+        <ToggleButton
+          style={{
+            ...defaultStyle,
+            marginTop: 0,
+            width: "100%",
+          }}
+          icon="clock-time-two-outline"
+          value="Tresiba"
+        />
+      </ToggleButton.Group>
       <Button
         style={{
           ...defaultStyle,
@@ -37,7 +70,6 @@ export default function AddMedication({ navigation }) {
               name,
             });
           } catch (e) {}
-          alert("Medication has been added.");
           navigation.pop();
         }}
       >

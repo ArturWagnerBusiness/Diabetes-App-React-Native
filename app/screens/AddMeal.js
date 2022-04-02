@@ -48,7 +48,6 @@ export default function AddMeal({ navigation }) {
               value: carbo,
             });
           } catch (e) {}
-          alert("Meal has been added.");
           navigation.pop();
         }}
       >

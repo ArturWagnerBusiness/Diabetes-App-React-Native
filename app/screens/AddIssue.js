@@ -37,7 +37,6 @@ export default function AddIssue({ navigation }) {
               description,
             });
           } catch (e) {}
-          alert("Issue/Challenge has been added.");
           navigation.pop();
         }}
       >
