@@ -3,10 +3,12 @@ import { FAB, Modal, Portal, Provider } from "react-native-paper";
 import { Text, FlatList } from "react-native";
 import ItemContext from "../contexts/ItemContext";
 import RecordItem from "../components/RecordItem";
+import FoodSearch from "../components/FoodSearch";
 
 export default function ViewRecords({ navigation }) {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isSettingsOpen, setSettingsOpen] = useState(false);
+  const [isFoodSearchOpen, setFoodSearchOpen] = useState(false);
   const { state } = useContext(ItemContext);
 
   useEffect(() => {
@@ -48,6 +50,18 @@ export default function ViewRecords({ navigation }) {
             <Text>Example Modal. Click outside this area to dismiss.</Text>
           </Modal>
         </Portal>
+        <Portal>
+          <Modal
+            visible={isFoodSearchOpen}
+            onDismiss={() => setFoodSearchOpen(false)}
+            contentContainerStyle={{
+              backgroundColor: "white",
+              padding: 20,
+            }}
+          >
+            <FoodSearch />
+          </Modal>
+        </Portal>
       </Provider>
       <Provider>
         <Portal>
@@ -67,7 +81,7 @@ export default function ViewRecords({ navigation }) {
               },
               {
                 icon: "emoticon-neutral-outline",
-                label: "Add Issue/Challange",
+                label: "Add Issue/Challenge",
                 onPress: () => navigation.navigate("Issue"),
               },
               {
@@ -83,13 +97,14 @@ export default function ViewRecords({ navigation }) {
               {
                 icon: "magnify",
                 label: "Search food",
-                onPress: () => console.log("Open popup"),
+                onPress: () => setFoodSearchOpen(true),
               },
             ]}
             onStateChange={({ open }) => {
               setMenuOpen(open);
             }}
             onPress={() => {
+              setFoodSearchOpen(false);
               setSettingsOpen(false);
             }}
           />

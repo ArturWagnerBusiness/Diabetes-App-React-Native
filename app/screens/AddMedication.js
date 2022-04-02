@@ -106,7 +106,7 @@ export default function AddMedication({ navigation }) {
         {CURRENT_TIME.getMinutes() < 10
           ? `0${CURRENT_TIME.getMinutes()}`
           : CURRENT_TIME.getMinutes()}{" "}
-        on {CURRENT_TIME.toLocaleDateString()}
+        on ({CURRENT_TIME.toDateString()}){" "}
       </Text>
     </View>
   );
