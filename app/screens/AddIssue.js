@@ -19,7 +19,7 @@ export default function AddIssue({ navigation }) {
         style={{
           ...defaultStyle,
         }}
-        label="Description"
+        label="Description*"
         value={description}
         onChangeText={(text) => setDescription(text)}
       />
@@ -31,13 +31,20 @@ export default function AddIssue({ navigation }) {
         color={COLOR.PRIMARY}
         mode="contained"
         onPress={() => {
-          try {
-            storage.create({
-              type: "challenge",
-              description,
-            });
-          } catch (e) {}
-          navigation.pop();
+          // Checking if required fields are filled
+          if (description === "") {
+            alert(
+              "Please fill required fields (Description field) or cancel form"
+            );
+          } else {
+            try {
+              storage.create({
+                type: "challenge",
+                description,
+              });
+            } catch (e) {}
+            navigation.pop();
+          }
         }}
       >
         Add record

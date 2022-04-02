@@ -1,3 +1,4 @@
+import { NavigationContainerRefContext } from "@react-navigation/native";
 import React from "react";
 import { Text, View } from "react-native";
 import { Button, Checkbox, TextInput } from "react-native-paper";
@@ -21,10 +22,10 @@ export default function AddBloodSugarLevel({ navigation }) {
         style={{
           ...defaultStyle,
         }}
-        label="Measurement"
+        label="Measurement*"
         value={value}
         onChangeText={(text) => setValue(text)}
-        right={<TextInput.Affix text="mg/dl" />}
+        right={<TextInput.Affix text="mmol/L" />}
       />
       <View
         style={{
@@ -83,15 +84,20 @@ export default function AddBloodSugarLevel({ navigation }) {
         color={COLOR.PRIMARY}
         mode="contained"
         onPress={() => {
-          try {
-            storage.create({
-              type: "meal",
-              value,
-              activity: typeof activity === "string" ? activity : "",
-              challenge: typeof challenge === "string" ? challenge : "",
-            });
-          } catch (e) {}
-          navigation.pop();
+          // Checking if required fields are filled
+          if (value === "") {
+            alert("Please fill required fields (Measurement field) or cancel form");
+          } else {
+            try {
+              storage.create({
+                type: "blood_sugar",
+                value,
+                activity: typeof activity === "string" ? activity : "",
+                challenge: typeof challenge === "string" ? challenge : "",
+              });
+            } catch (e) {}
+            navigation.pop();
+          }
         }}
       >
         Add record

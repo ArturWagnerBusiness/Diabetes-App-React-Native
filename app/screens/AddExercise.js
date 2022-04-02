@@ -20,7 +20,7 @@ export default function AddExercise({ navigation }) {
         style={{
           ...defaultStyle,
         }}
-        label="Name"
+        label="Name*"
         value={name}
         onChangeText={(text) => setName(text)}
       />
@@ -40,13 +40,19 @@ export default function AddExercise({ navigation }) {
         color={COLOR.PRIMARY}
         mode="contained"
         onPress={() => {
-          try {
-            storage.create({
-              type: "activity",
-              name,
-            });
-          } catch (e) {}
-          navigation.pop();
+          // Checking if required fields are filled
+          if (name === "") {
+            alert("Please fill required fields (Name field) or cancel form");
+          } else {
+            try {
+              storage.create({
+                type: "activity",
+                name,
+                description,
+              });
+            } catch (e) {}
+            navigation.pop();
+          }
         }}
       >
         Add record

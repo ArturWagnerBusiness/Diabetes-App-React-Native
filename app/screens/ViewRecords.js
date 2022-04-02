@@ -31,7 +31,7 @@ export default function ViewRecords({ navigation }) {
   return (
     <>
       <FlatList
-        data={state}
+        data={[...state].reverse()} // Displaying most recent records first
         keyExtractor={(e) => e.id.toString()}
         renderItem={({ item }) => {
           return <RecordItem item={item} />;
