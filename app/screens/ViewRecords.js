@@ -19,7 +19,6 @@ export default function ViewRecords({ navigation }) {
             icon="cog"
             onPress={() => {
               setSettingsOpen(true);
-              console.log(storage.state);
             }}
           />
         </>
@@ -29,6 +28,13 @@ export default function ViewRecords({ navigation }) {
 
   return (
     <>
+      <FlatList
+        data={state}
+        keyExtractor={(e) => e.id.toString()}
+        renderItem={({ item }) => {
+          return <RecordItem item={item} />;
+        }}
+      />
       <Provider>
         <Portal>
           <Modal
@@ -43,13 +49,6 @@ export default function ViewRecords({ navigation }) {
           </Modal>
         </Portal>
       </Provider>
-      <FlatList
-        data={state}
-        keyExtractor={(e) => e.id.toString()}
-        renderItem={({ item }) => {
-          return <RecordItem item={item} />;
-        }}
-      />
       <Provider>
         <Portal>
           <FAB.Group
