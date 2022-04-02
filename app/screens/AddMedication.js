@@ -16,7 +16,10 @@ export default function AddMedication({ navigation }) {
   return (
     <View>
       <ToggleButton.Group
-        onValueChange={(value) => setName(value)}
+        onValueChange={(value) => {
+          if (value === null) return;
+          setName(value);
+        }}
         value={name}
       >
         <Text
