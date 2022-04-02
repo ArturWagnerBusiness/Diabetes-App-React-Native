@@ -122,7 +122,14 @@ export default function AddBloodSugarLevel({ navigation }) {
           fontSize: 20,
         }}
       >
-        Will be logged at {CURRENT_TIME.getHours()}:{CURRENT_TIME.getMinutes()}{" "}
+        Will be logged at{" "}
+        {CURRENT_TIME.getHours() < 10
+          ? `0${CURRENT_TIME.getHours()}`
+          : CURRENT_TIME.getHours()}
+        :
+        {CURRENT_TIME.getMinutes() < 10
+          ? `0${CURRENT_TIME.getMinutes()}`
+          : CURRENT_TIME.getMinutes()}{" "}
         on {CURRENT_TIME.toLocaleDateString()}
       </Text>
     </View>
