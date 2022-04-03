@@ -1,8 +1,8 @@
 import React from "react";
-import { Text, View, StyleSheet } from "react-native";
-import { Button, Card, Title, Paragraph, Chip } from "react-native-paper";
+import { StyleSheet } from "react-native";
+import { Card, Title, Paragraph, Chip } from "react-native-paper";
 import { COLOR } from "../pallet";
-import ItemContext from "../contexts/ItemContext"; // For delete button later
+import CardOptions from "./CardOptions";
 
 export default function RecordItem(props) {
   // Setting up different return statements depending on the type of item
@@ -15,6 +15,13 @@ export default function RecordItem(props) {
           <Title>{props.item.name}</Title>
           <Paragraph>{props.item.value} grams</Paragraph>
         </Card.Content>
+        <Card.Actions>
+          <CardOptions
+            itemId={props.item.id}
+            setDeleteOpen={props.setDeleteOpen}
+            setDeleteId={props.setDeleteId}
+          />
+        </Card.Actions>
       </Card>
     );
   } else if (props.item.type === "medication") {
@@ -30,6 +37,13 @@ export default function RecordItem(props) {
               : "Tresiba (Long/Slow acting)"}
           </Title>
         </Card.Content>
+        <Card.Actions>
+          <CardOptions
+            itemId={props.item.id}
+            setDeleteOpen={props.setDeleteOpen}
+            setDeleteId={props.setDeleteId}
+          />
+        </Card.Actions>
       </Card>
     );
   } else if (props.item.type === "activity") {
@@ -41,6 +55,13 @@ export default function RecordItem(props) {
           <Title>{props.item.name}</Title>
           <Paragraph>{props.item.description}</Paragraph>
         </Card.Content>
+        <Card.Actions>
+          <CardOptions
+            itemId={props.item.id}
+            setDeleteOpen={props.setDeleteOpen}
+            setDeleteId={props.setDeleteId}
+          />
+        </Card.Actions>
       </Card>
     );
   } else if (props.item.type === "blood_sugar") {
@@ -58,6 +79,13 @@ export default function RecordItem(props) {
             <Paragraph>Challenge: {props.item.challenge}</Paragraph>
           ) : null}
         </Card.Content>
+        <Card.Actions>
+          <CardOptions
+            itemId={props.item.id}
+            setDeleteOpen={props.setDeleteOpen}
+            setDeleteId={props.setDeleteId}
+          />
+        </Card.Actions>
       </Card>
     );
   } else if (props.item.type === "challenge") {
@@ -69,6 +97,13 @@ export default function RecordItem(props) {
           <Title>New Issue/Challenge</Title>
           <Paragraph>{props.item.description}</Paragraph>
         </Card.Content>
+        <Card.Actions>
+          <CardOptions
+            itemId={props.item.id}
+            setDeleteOpen={props.setDeleteOpen}
+            setDeleteId={props.setDeleteId}
+          />
+        </Card.Actions>
       </Card>
     );
   } else {
