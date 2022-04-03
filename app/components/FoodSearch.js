@@ -1,14 +1,7 @@
 import React from "react";
-import { FlatList, Image, View, Text, ScrollView } from "react-native";
+import { FlatList, View } from "react-native";
 import axios from "axios";
-import {
-  Button,
-  Card,
-  Paragraph,
-  Searchbar,
-  Surface,
-  Title,
-} from "react-native-paper";
+import { Button, Card, Paragraph, Searchbar } from "react-native-paper";
 import { COLOR } from "../pallet";
 
 export default class FoodSearch extends React.Component {
@@ -65,20 +58,35 @@ export default class FoodSearch extends React.Component {
           data={this.state.data}
           renderItem={({ item }) => {
             let data = item.food;
+            let parse = (x) => {
+              return parseFloat(x).toFixed(2);
+            };
             return (
               <Card
                 style={{
                   margin: 5,
                 }}
               >
-                <Card.Title title={`${data.label} (${data.category}`} />
+                <Card.Title
+                  title={`${data.label}`}
+                  subtitle={`${data.category}`}
+                />
                 <Card.Content>
-                  <Paragraph>CHOCDF: {data.image}</Paragraph>
-                  <Paragraph>CHOCDF: {data.nutrients.CHOCDF}</Paragraph>
-                  <Paragraph>ENERC_KCAL: {data.nutrients.ENERC_KCAL}</Paragraph>
-                  <Paragraph>FAT: {data.nutrients.FAT}</Paragraph>
-                  <Paragraph>FIBTG: {data.nutrients.FIBTG}</Paragraph>
-                  <Paragraph>PROCNT: {data.nutrients.PROCNT}</Paragraph>
+                  <Paragraph>
+                    Carbohydrate (net): {parse(data.nutrients.CHOCDF)} grams
+                  </Paragraph>
+                  <Paragraph>
+                    Energy: {parse(data.nutrients.ENERC_KCAL)} kcal
+                  </Paragraph>
+                  <Paragraph>
+                    Total lipid (fat): {parse(data.nutrients.FAT)} grams
+                  </Paragraph>
+                  <Paragraph>
+                    Fiber, total dietary: {parse(data.nutrients.FIBTG)} grams
+                  </Paragraph>
+                  <Paragraph>
+                    Protein: {parse(data.nutrients.PROCNT)} grams
+                  </Paragraph>
                 </Card.Content>
                 {data.image !== undefined ? (
                   <Card.Cover source={{ uri: data.image }} />
