@@ -1,7 +1,6 @@
-import { NavigationContainerRefContext } from "@react-navigation/native";
 import React from "react";
 import { Text, View } from "react-native";
-import { Button, Checkbox, TextInput } from "react-native-paper";
+import { Button, Checkbox, FAB, TextInput } from "react-native-paper";
 import ItemContext from "../contexts/ItemContext";
 import { COLOR } from "../pallet";
 
@@ -16,6 +15,19 @@ export default function AddBloodSugarLevel({ navigation }) {
   const [activity, setActivity] = React.useState(null);
   const [challenge, setChallenge] = React.useState(null);
   const CURRENT_TIME = new Date();
+  React.useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <>
+          <FAB
+            small
+            style={{ margin: 8, backgroundColor: COLOR.BLOOD_SUGAR }}
+            icon="water"
+          />
+        </>
+      ),
+    });
+  });
   return (
     <View>
       <TextInput
@@ -86,7 +98,9 @@ export default function AddBloodSugarLevel({ navigation }) {
         onPress={() => {
           // Checking if required fields are filled
           if (value === "") {
-            alert("Please fill required fields (Measurement field) or cancel form");
+            alert(
+              "Please fill required fields (Measurement field) or cancel form"
+            );
           } else {
             try {
               storage.create({
@@ -130,7 +144,7 @@ export default function AddBloodSugarLevel({ navigation }) {
         {CURRENT_TIME.getMinutes() < 10
           ? `0${CURRENT_TIME.getMinutes()}`
           : CURRENT_TIME.getMinutes()}{" "}
-        on {CURRENT_TIME.toLocaleDateString()}
+        on ({CURRENT_TIME.toDateString()}){" "}
       </Text>
     </View>
   );

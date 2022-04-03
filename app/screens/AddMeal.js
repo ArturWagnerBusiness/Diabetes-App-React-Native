@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, View } from "react-native";
-import { Button, TextInput } from "react-native-paper";
+import { Button, FAB, TextInput } from "react-native-paper";
 import ItemContext from "../contexts/ItemContext";
 import { COLOR } from "../pallet";
 
@@ -14,6 +14,19 @@ export default function AddMeal({ navigation }) {
   const [name, setName] = React.useState("");
   const [carbo, setCarbo] = React.useState("");
   const CURRENT_TIME = new Date();
+  React.useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <>
+          <FAB
+            small
+            style={{ margin: 8, backgroundColor: COLOR.MEAL }}
+            icon="food"
+          />
+        </>
+      ),
+    });
+  });
   return (
     <View>
       <TextInput
@@ -88,7 +101,7 @@ export default function AddMeal({ navigation }) {
         {CURRENT_TIME.getMinutes() < 10
           ? `0${CURRENT_TIME.getMinutes()}`
           : CURRENT_TIME.getMinutes()}{" "}
-        on {CURRENT_TIME.toLocaleDateString()}
+        on ({CURRENT_TIME.toDateString()}){" "}
       </Text>
     </View>
   );

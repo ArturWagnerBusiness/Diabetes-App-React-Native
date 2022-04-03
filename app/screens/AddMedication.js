@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, View } from "react-native";
-import { Button, ToggleButton } from "react-native-paper";
+import { Button, FAB, ToggleButton } from "react-native-paper";
 import ItemContext from "../contexts/ItemContext";
 import { COLOR } from "../pallet";
 
@@ -13,6 +13,19 @@ export default function AddMedication({ navigation }) {
   const storage = React.useContext(ItemContext);
   const [name, setName] = React.useState("Fiasp");
   const CURRENT_TIME = new Date();
+  React.useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <>
+          <FAB
+            small
+            style={{ margin: 8, backgroundColor: COLOR.MEDICATION }}
+            icon="needle"
+          />
+        </>
+      ),
+    });
+  });
   return (
     <View>
       <ToggleButton.Group

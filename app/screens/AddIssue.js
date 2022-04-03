@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, View } from "react-native";
-import { Button, TextInput } from "react-native-paper";
+import { Button, FAB, TextInput } from "react-native-paper";
 import ItemContext from "../contexts/ItemContext";
 import { COLOR } from "../pallet";
 
@@ -13,6 +13,19 @@ export default function AddIssue({ navigation }) {
   const storage = React.useContext(ItemContext);
   const [description, setDescription] = React.useState("");
   const CURRENT_TIME = new Date();
+  React.useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <>
+          <FAB
+            small
+            style={{ margin: 8, backgroundColor: COLOR.CHALLENGE }}
+            icon="emoticon-neutral-outline"
+          />
+        </>
+      ),
+    });
+  });
   return (
     <View>
       <TextInput
@@ -77,7 +90,7 @@ export default function AddIssue({ navigation }) {
         {CURRENT_TIME.getMinutes() < 10
           ? `0${CURRENT_TIME.getMinutes()}`
           : CURRENT_TIME.getMinutes()}{" "}
-        on {CURRENT_TIME.toLocaleDateString()}
+        on ({CURRENT_TIME.toDateString()}){" "}
       </Text>
     </View>
   );

@@ -41,6 +41,10 @@ export default function ViewRecords({ navigation }) {
             small
             icon="cog"
             onPress={() => {
+              setMenuOpen(false);
+              setFoodSearchOpen(false);
+              setEditorOpen(false);
+              setDeleteOpen(false);
               setSettingsOpen(true);
             }}
           />
@@ -202,6 +206,8 @@ export default function ViewRecords({ navigation }) {
             onPress={() => {
               setFoodSearchOpen(false);
               setSettingsOpen(false);
+              setEditorOpen(false);
+              setDeleteOpen(false);
             }}
           />
         </Portal>
