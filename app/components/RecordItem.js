@@ -2,7 +2,8 @@ import React from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { Button, Card, Title, Paragraph, Chip, FAB } from "react-native-paper";
 import { COLOR } from "../pallet";
-import ItemContext from "../contexts/ItemContext"; // For delete button later
+import CardOptions from "./CardOptions";
+
 /**
  *
  * @param {{
@@ -47,6 +48,13 @@ export default function RecordItem(props) {
           <Paragraph>{props.item.name} grams</Paragraph>
           <FabObj name="name" />
         </Card.Content>
+        <Card.Actions>
+          <CardOptions
+            itemId={props.item.id}
+            setDeleteOpen={props.setDeleteOpen}
+            setDeleteId={props.setDeleteId}
+          />
+        </Card.Actions>
       </Card>
     );
   } else if (props.item.type === "medication") {
@@ -63,6 +71,13 @@ export default function RecordItem(props) {
             {/* Does not need a Fab for editing data, as the entry can easily be remade*/}
           </Title>
         </Card.Content>
+        <Card.Actions>
+          <CardOptions
+            itemId={props.item.id}
+            setDeleteOpen={props.setDeleteOpen}
+            setDeleteId={props.setDeleteId}
+          />
+        </Card.Actions>
       </Card>
     );
   } else if (props.item.type === "activity") {
@@ -76,6 +91,13 @@ export default function RecordItem(props) {
           <Paragraph>{props.item.description}</Paragraph>
           <FabObj name="description" />
         </Card.Content>
+        <Card.Actions>
+          <CardOptions
+            itemId={props.item.id}
+            setDeleteOpen={props.setDeleteOpen}
+            setDeleteId={props.setDeleteId}
+          />
+        </Card.Actions>
       </Card>
     );
   } else if (props.item.type === "blood_sugar") {
@@ -100,6 +122,13 @@ export default function RecordItem(props) {
             </>
           ) : null}
         </Card.Content>
+        <Card.Actions>
+          <CardOptions
+            itemId={props.item.id}
+            setDeleteOpen={props.setDeleteOpen}
+            setDeleteId={props.setDeleteId}
+          />
+        </Card.Actions>
       </Card>
     );
   } else if (props.item.type === "challenge") {
@@ -112,6 +141,13 @@ export default function RecordItem(props) {
           <Paragraph>{props.item.description}</Paragraph>
           <FabObj name="description" />
         </Card.Content>
+        <Card.Actions>
+          <CardOptions
+            itemId={props.item.id}
+            setDeleteOpen={props.setDeleteOpen}
+            setDeleteId={props.setDeleteId}
+          />
+        </Card.Actions>
       </Card>
     );
   } else {

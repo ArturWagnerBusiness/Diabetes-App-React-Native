@@ -12,6 +12,7 @@ import { Text, FlatList } from "react-native";
 import ItemContext from "../contexts/ItemContext";
 import RecordItem from "../components/RecordItem";
 import FoodSearch from "../components/FoodSearch";
+import { COLOR } from "../pallet";
 
 export default function ViewRecords({ navigation }) {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -25,7 +26,11 @@ export default function ViewRecords({ navigation }) {
   const [editorValue, setEditorValue] = useState("");
   // Variable that stored the data to be passed into the object
   const [editorInput, setEditorInput] = useState("");
-  const { state, update } = useContext(ItemContext);
+  // Delete on item is pressed
+  const [isDeleteOpen, setDeleteOpen] = useState(false);
+  // Used to identify ID of item to be deleted
+  const [deleteId, setDeleteId] = useState(0);
+  const { state, remove, update } = useContext(ItemContext);
 
   useEffect(() => {
     navigation.setOptions({
@@ -56,6 +61,8 @@ export default function ViewRecords({ navigation }) {
               setEditorValue={setEditorValue}
               setEditorInput={setEditorInput}
               setEditorOpen={setEditorOpen}
+              setDeleteOpen={setDeleteOpen}
+              setDeleteId={setDeleteId}
             />
           );
         }}
@@ -119,6 +126,35 @@ export default function ViewRecords({ navigation }) {
               >
                 Done
               </Button>
+            </Dialog.Actions>
+          </Dialog>
+        </Portal>
+        {/* Pop up for item deletion */}
+        <Portal>
+          <Dialog visible={isDeleteOpen} onDismiss={() => setDeleteOpen(false)}>
+            <Dialog.Title>
+              Are you sure you want to delete this item?
+            </Dialog.Title>
+            <Dialog.Actions>
+              <FAB
+                style={{
+                  marginRight: 20,
+                }}
+                icon="close"
+                onPress={() => {
+                  setDeleteOpen(false);
+                }}
+              />
+              <FAB
+                style={{
+                  backgroundColor: COLOR.BLOOD_SUGAR,
+                }}
+                icon="check"
+                onPress={() => {
+                  remove(deleteId);
+                  setDeleteOpen(false);
+                }}
+              />
             </Dialog.Actions>
           </Dialog>
         </Portal>
