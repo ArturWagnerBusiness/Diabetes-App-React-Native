@@ -1,6 +1,6 @@
 import React from "react";
-import { Text, View, StyleSheet } from "react-native";
-import { Button, Card, Title, Paragraph, Chip, FAB } from "react-native-paper";
+import { StyleSheet } from "react-native";
+import { Card, Title, Paragraph, Chip, FAB } from "react-native-paper";
 import { COLOR } from "../pallet";
 import CardOptions from "./CardOptions";
 
@@ -42,10 +42,10 @@ export default function RecordItem(props) {
       <Card style={styles.card}>
         <Card.Content>
           <Chip style={styles.mealchip}>Meal</Chip>
-          <Title>{props.item.value}</Title>
+          <Title>{props.item.value} grams</Title>
           <FabObj name="value" />
 
-          <Paragraph>{props.item.name} grams</Paragraph>
+          <Paragraph>{props.item.name}</Paragraph>
           <FabObj name="name" />
         </Card.Content>
         <Card.Actions>
@@ -53,6 +53,8 @@ export default function RecordItem(props) {
             itemId={props.item.id}
             setDeleteOpen={props.setDeleteOpen}
             setDeleteId={props.setDeleteId}
+            editMode={editMode}
+            setEditMode={setEditMode}
           />
         </Card.Actions>
       </Card>
@@ -76,6 +78,8 @@ export default function RecordItem(props) {
             itemId={props.item.id}
             setDeleteOpen={props.setDeleteOpen}
             setDeleteId={props.setDeleteId}
+            editMode={editMode}
+            setEditMode={setEditMode}
           />
         </Card.Actions>
       </Card>
@@ -96,6 +100,8 @@ export default function RecordItem(props) {
             itemId={props.item.id}
             setDeleteOpen={props.setDeleteOpen}
             setDeleteId={props.setDeleteId}
+            editMode={editMode}
+            setEditMode={setEditMode}
           />
         </Card.Actions>
       </Card>
@@ -127,6 +133,8 @@ export default function RecordItem(props) {
             itemId={props.item.id}
             setDeleteOpen={props.setDeleteOpen}
             setDeleteId={props.setDeleteId}
+            editMode={editMode}
+            setEditMode={setEditMode}
           />
         </Card.Actions>
       </Card>
@@ -146,6 +154,8 @@ export default function RecordItem(props) {
             itemId={props.item.id}
             setDeleteOpen={props.setDeleteOpen}
             setDeleteId={props.setDeleteId}
+            editMode={editMode}
+            setEditMode={setEditMode}
           />
         </Card.Actions>
       </Card>
