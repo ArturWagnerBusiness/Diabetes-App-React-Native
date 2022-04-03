@@ -1,5 +1,13 @@
 import { useEffect, useState, useContext } from "react";
-import { FAB, Modal, Portal, Provider } from "react-native-paper";
+import {
+  Button,
+  Dialog,
+  FAB,
+  Modal,
+  Portal,
+  Provider,
+  TextInput,
+} from "react-native-paper";
 import { Text, FlatList } from "react-native";
 import ItemContext from "../contexts/ItemContext";
 import RecordItem from "../components/RecordItem";
@@ -9,7 +17,15 @@ export default function ViewRecords({ navigation }) {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isSettingsOpen, setSettingsOpen] = useState(false);
   const [isFoodSearchOpen, setFoodSearchOpen] = useState(false);
-  const { state } = useContext(ItemContext);
+  // Variable to open the entry editor
+  const [isEditorOpen, setEditorOpen] = useState(false);
+  // Variable that stores the entry that is going to be edited
+  const [editorObject, setEditorObject] = useState({});
+  // Variable that stores the property of the "entry object" that should be edited
+  const [editorValue, setEditorValue] = useState("");
+  // Variable that stored the data to be passed into the object
+  const [editorInput, setEditorInput] = useState("");
+  const { state, update } = useContext(ItemContext);
 
   useEffect(() => {
     navigation.setOptions({
@@ -27,14 +43,21 @@ export default function ViewRecords({ navigation }) {
       ),
     });
   });
-
   return (
     <>
       <FlatList
         data={[...state].reverse()} // Displaying most recent records first
         keyExtractor={(e) => e.id.toString()}
         renderItem={({ item }) => {
-          return <RecordItem item={item} />;
+          return (
+            <RecordItem
+              item={item}
+              setEditorObject={setEditorObject}
+              setEditorValue={setEditorValue}
+              setEditorInput={setEditorInput}
+              setEditorOpen={setEditorOpen}
+            />
+          );
         }}
       />
       <Provider>
@@ -61,6 +84,43 @@ export default function ViewRecords({ navigation }) {
           >
             <FoodSearch />
           </Modal>
+        </Portal>
+        <Portal>
+          <Dialog
+            visible={isEditorOpen}
+            onDismiss={() => {
+              setEditorOpen(false);
+            }}
+          >
+            <Dialog.Title>Edit</Dialog.Title>
+            <Dialog.Content>
+              <TextInput
+                label="Data"
+                value={editorInput}
+                onChangeText={(text) => setEditorInput(text)}
+              />
+            </Dialog.Content>
+            <Dialog.Actions>
+              <Button
+                onPress={() => {
+                  setEditorOpen(false);
+                }}
+              >
+                Cancel
+              </Button>
+              <Button
+                onPress={() => {
+                  setEditorOpen(false);
+                  if (editorInput !== "") {
+                    editorObject[editorValue] = editorInput;
+                    update(editorObject);
+                  }
+                }}
+              >
+                Done
+              </Button>
+            </Dialog.Actions>
+          </Dialog>
         </Portal>
       </Provider>
       <Provider>
