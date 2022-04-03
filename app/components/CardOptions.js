@@ -1,5 +1,4 @@
 import { React } from "react";
-import { StyleSheet } from "react-native";
 import { FAB } from "react-native-paper";
 import { COLOR } from "../pallet";
 

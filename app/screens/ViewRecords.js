@@ -7,6 +7,7 @@ import {
   Portal,
   Provider,
   TextInput,
+  Title,
 } from "react-native-paper";
 import { Text, FlatList } from "react-native";
 import ItemContext from "../contexts/ItemContext";
@@ -54,23 +55,29 @@ export default function ViewRecords({ navigation }) {
   });
   return (
     <>
-      <FlatList
-        data={[...state].reverse()} // Displaying most recent records first
-        keyExtractor={(e) => e.id.toString()}
-        renderItem={({ item }) => {
-          return (
-            <RecordItem
-              item={item}
-              setEditorObject={setEditorObject}
-              setEditorValue={setEditorValue}
-              setEditorInput={setEditorInput}
-              setEditorOpen={setEditorOpen}
-              setDeleteOpen={setDeleteOpen}
-              setDeleteId={setDeleteId}
-            />
-          );
-        }}
-      />
+      {state.length === 0 ? (
+        <Title style={{ marginTop: 8, textAlign: "center", color: COLOR.GRAY }}>
+          Add Record To View It Here
+        </Title>
+      ) : (
+        <FlatList
+          data={[...state].reverse()} // Displaying most recent records first
+          keyExtractor={(e) => e.id.toString()}
+          renderItem={({ item }) => {
+            return (
+              <RecordItem
+                item={item}
+                setEditorObject={setEditorObject}
+                setEditorValue={setEditorValue}
+                setEditorInput={setEditorInput}
+                setEditorOpen={setEditorOpen}
+                setDeleteOpen={setDeleteOpen}
+                setDeleteId={setDeleteId}
+              />
+            );
+          }}
+        />
+      )}
       <Provider>
         <Portal>
           <Modal
