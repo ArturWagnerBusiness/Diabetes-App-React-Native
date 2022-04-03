@@ -16,6 +16,23 @@ import CardOptions from "./CardOptions";
  * @returns
  */
 export default function RecordItem(props) {
+  function LoggedDateTime() {
+    let itemDate = new Date(props.item.date);
+    return (
+      <Paragraph>
+        Recorded at{" "}
+        {itemDate.getHours() < 10
+          ? `0${itemDate.getHours()}`
+          : itemDate.getHours()}
+        :
+        {itemDate.getMinutes() < 10
+          ? `0${itemDate.getMinutes()}`
+          : itemDate.getMinutes()}{" "}
+        on ({itemDate.toDateString()}){" "}
+      </Paragraph>
+    );
+  }
+
   let FabObj = (fabProps) => {
     return editMode ? (
       <FAB
@@ -47,6 +64,7 @@ export default function RecordItem(props) {
 
           <Paragraph>{props.item.name}</Paragraph>
           <FabObj name="name" />
+          <LoggedDateTime />
         </Card.Content>
         <Card.Actions>
           <CardOptions
@@ -72,6 +90,7 @@ export default function RecordItem(props) {
               : "Tresiba (Long/Slow acting)"}
             {/* Does not need a Fab for editing data, as the entry can easily be remade*/}
           </Title>
+          <LoggedDateTime />
         </Card.Content>
         <Card.Actions>
           <CardOptions
@@ -94,6 +113,7 @@ export default function RecordItem(props) {
           <FabObj name="name" />
           <Paragraph>{props.item.description}</Paragraph>
           <FabObj name="description" />
+          <LoggedDateTime />
         </Card.Content>
         <Card.Actions>
           <CardOptions
@@ -127,6 +147,7 @@ export default function RecordItem(props) {
               <FabObj name="challenge" />
             </>
           ) : null}
+          <LoggedDateTime />
         </Card.Content>
         <Card.Actions>
           <CardOptions
@@ -148,6 +169,7 @@ export default function RecordItem(props) {
           <Title>New Issue/Challenge</Title>
           <Paragraph>{props.item.description}</Paragraph>
           <FabObj name="description" />
+          <LoggedDateTime />
         </Card.Content>
         <Card.Actions>
           <CardOptions
