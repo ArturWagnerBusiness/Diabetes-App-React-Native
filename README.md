@@ -1,5 +1,10 @@
 # Diary App for Diabetes Type 1 (React Native)
 
+### Development Team
+
+- Developer 1: Artur Wagner
+- Developer 2: Arash Afrazeh
+
 ### Preparation (Please install these before continuing)
 
 | Technology Required | Developer 1 | Developer 2 |
